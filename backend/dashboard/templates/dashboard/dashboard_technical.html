@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Dashboard
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+  <div class="w-full">
+    <div class="flex flex-row justify-content-between align-content-center">
+        <h2>Dashboard</h2>
+        <div class="flex">
+            <div class="select-button">
+                <ul class="mr-1">
+                    <li class="active"><a href="/dashboard/{{ url_id }}/technical/" onclick="showLoadingOverlay()">Technical</a></li>
+                    {% comment %} <li><a href="/dashboard/{{ url_id }}/dealer/" onclick="showLoadingOverlay()">Dealer</a></li> {% endcomment %}
+                    <li><a href="/dashboard/{{ url_id }}/business/" onclick="showLoadingOverlay()">Business</a></li>
+                </ul>
+                {% if campaign_info.is_finished %}
+                <ul class="mr-1">
+                    <li><a href="{% url 'dashboard_remediations' campaign_url_id=campaign.url_id %}" onclick="showLoadingOverlay()">Remediations</a></li>
+                </ul>
+                {% endif %}
+                <ul>
+                    <li><a href="/dashboard/{{ url_id }}/options/" onclick="showLoadingOverlay()">Options</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toolkit navbar -->
+    <div id="toolkit-nav">
+        <div id="openModalNotes"><i class="bi bi-journal-bookmark"></i></div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="modalOverlayNotes" class="overlay hidden">
+        <!-- Fenêtre modale -->
+        <div class="modal">
+            <h2>Notes</h2>
+            <form action="{% url 'campaign_notes' campaign_url_id=campaign.url_id %}" method="POST" class="flex flex-column align-items-end">
+                {% csrf_token %}
+                {{ form_campaign_notes.notes }}
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </form>
+        </div>
+    </div>
+    
+    <div class="grid">
+        <!-- Information cards -->
+        <div class="col-12 md:col-6 sm:col-6 xl:col-2">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Payloads Sent" text_big=campaign_info.sent text_small="" subtitle_nb=campaign_info.to_be_sent subtitle_text="must be sent" subtitle_nb_color="text-green-500" icon="bi bi-send text-blue-500" %}
+            </div>
+        </div>
+        <div class="col-12 md:col-6 sm:col-6 xl:col-2">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Compromises" text_big=campaign_info.compromises text_small='persons' subtitle_text="of compromises" subtitle_nb=campaign_info.percentage_compromises subtitle_nb_color="text-red-500" icon='bi bi-exclamation-triangle text-red-500' %}
+            </div>
+        </div>
+        <div class="col-12 md:col-3 sm:col-6 xl:col-2">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Signaling" text_big=campaign_info.current_signaling text_small='%' subtitle_nb=campaign_info.expected_signaling subtitle_text="expected as success" subtitle_nb_color="text-yellow-500" icon='bi bi-person-bounding-box text-yellow-500' %}
+            </div>
+        </div>
+        <div class="col-12 md:col-3 sm:col-6 xl:col-2">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Servers" text_big="4" text_small="in use" subtitle_nb="" subtitle_text="since beginning" subtitle_nb_color="text-green-500" icon='bi bi-server text-cyan-500' %}
+            </div>
+        </div>
+        {% if campaign_info.is_finished %}
+            <div class="col-12 md:col-3 sm:col-6 xl:col-2">
+                <div class="card h-full">
+                    {% include 'components/Cards/InformationCard.html' with title="Feedbacks" text_big=campaign_info.percentage_feedbacks text_small="%" subtitle_nb=campaign_info.feedbacks subtitle_text="feedbacks collected" subtitle_nb_color="text-green-500" icon='bi bi-chat-square-dots text-green-400' %}
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12 md:col-3 sm:col-6 xl:col-2">
+                <div class="card h-full">
+                    {% include 'components/Cards/InformationCard.html' with title="Feedbacks" text_big="-" text_small="" subtitle_nb="" subtitle_text="not started yet" subtitle_nb_color="text-green-500" icon='bi bi-chat-square-dots text-green-400' %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="col-12 md:col-3 sm:col-6 xl:col-2">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Duration of test" text_big=campaign_info.hours_elapsed text_small='hours' subtitle_nb=campaign_info.hours_remaining subtitle_text="remaining" subtitle_nb_color="text-yellow-600" icon='bi bi-clock text-yellow-500' %}
+            </div>
+        </div>
+
+            <!-- Activity timeline -->
+            <div class="col-12 xl:col-8">
+            <div class="card h-full">
+                {% include 'components/Charts/TimelineGraph.html' with title="Timeline of activities" data=activity_timeline %}
+            </div>
+            </div>
+
+            <!-- Compromises by categories -->
+            <div class="col-12 xl:col-4">
+            <div class="card h-full">
+                <div id="compromised_by_carousel">
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides">
+                            <li class="glide__slide h-auto">
+                                {% include 'components/Charts/RadarGraph.html' with id="compromises_categories_graph" title="Activities by categories" data=compromises_categories_data %}
+                            </li>
+                            <li class="glide__slide h-auto">
+                                {% include 'components/Charts/RadarGraph.html' with id="compromises_places_of_work_graph" title="Activities by places of work" data=compromises_places_of_work_data %}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="glide__arrows flex flex-row justify-content-between" data-glide-el="controls">
+                        <button class="glide__arrow glide__arrow--left btn btn-primary" data-glide-dir="<">
+                            Prev
+                        </button>
+                        <button class="glide__arrow glide__arrow--right btn btn-primary" data-glide-dir=">">
+                            Next
+                        </i></button>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        <!-- Information cards -->
+        <div class="col-12 md:col-6 sm:col-6 xl:col-2">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Clicks on link" text_big=campaign_info.clicks text_small="clicked" subtitle_nb="" subtitle_text="" subtitle_nb_color="text-green-500" icon='bi bi-mouse2 text-orange-500' %}
+            </div>
+        </div>
+        <div class="col-12 md:col-6 sm:col-6 xl:col-2">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Download attachments" text_big=campaign_info.download_attachments text_small='downloaded' subtitle_nb="" subtitle_text="" subtitle_nb_color="text-purple-500" icon='bi bi-envelope-paper text-purple-600' %}
+            </div>
+        </div>
+        <div class="col-12 md:col-6 sm:col-6 xl:col-2">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Open attachments" text_big=campaign_info.open_attachments text_small='opened' subtitle_nb="" subtitle_text="" subtitle_nb_color="text-purple-500" icon='bi bi-envelope-paper text-pink-600' %}
+            </div>
+        </div>
+        <div class="col-12 md:col-6 sm:col-6 xl:col-2">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Credentials" text_big=campaign_info.creds_leak text_small="leaked" subtitle_nb="" subtitle_text="" subtitle_nb_color="text-green-500" icon='bi bi-person-vcard text-green-500' %}
+            </div>
+        </div>
+        <div class="col-12 md:col-6 sm:col-6 xl:col-2">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Signalisations" text_big=campaign_info.reports text_small='collected' subtitle_nb="" subtitle_text="" subtitle_nb_color="" icon='bi bi-exclamation-circle text-yellow-500' %}
+            </div>
+        </div>
+        <div class="col-12 md:col-6 sm:col-6 xl:col-2">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Attack vector" text_medium=campaign_info.mode text_small='' subtitle_nb="" subtitle_text="" subtitle_nb_color="" icon='bi bi-arrows-move text-cyan-500' %}
+            </div>
+        </div>
+
+        <!-- List Activities -->
+        <div class="col-12 md:col-12 xl:col-12">
+            <div class="card h-full">
+                {% comment %} <span class="block text-800 font-medium text-left mb-3">
+                    Last activities
+                </span> {% endcomment %}
+                <table id="recent_activities" data-style="style-table-2" data-replace="jtable" data-search="true" data-row-per-page=6 data-locale="en">
+                    <thead>
+                        <tr>
+                            <th class="bi bi-sort-down">Country</th>
+                            <th class="bi bi-arrow-down-up">Place of work</th>
+                            <th class="bi bi-arrow-down-up">Job type</th>
+                            <th class="bi bi-arrow-down-up">Interests</th>
+                            <th class="bi bi-arrow-down-up">Payload sent at</th>
+                            <th class="bi bi-arrow-down-up">Event date</th>
+                            <th class="bi bi-arrow-down-up">Activity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for el in recent_activities %}
+                        <tr>
+                            <td>{{ el.country }}</td>
+                            <td>{{ el.place_of_work }}</td>
+                            <td>{{ el.job_type }}</td>
+                            <td>{{ el.interests|join:', ' }}</td>
+                            <td>{{ el.payload_sent_at }}</td>
+                            <td>{{ el.event_date }}</td>
+                            <td>{{ el.event_label }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        {% if campaign_info.is_finished %}
+            <!-- Feedback information cards -->
+            <div id="feedbacks_carousel" class="col-12">
+                <div class="glide__track shadow-primary-box p-0" data-glide-el="track">
+                    <ul class="glide__slides">
+                        {% for row in feedbacks_info %}
+                            {% if row.type == 'category' %}
+                                <li class="glide__slide h-auto card">
+                                    {% include 'components/Cards/InformationCard.html' with title=row.name text_big=row.count text_small='pers.' subtitle_nb="" subtitle_text="" subtitle_nb_color="" icon=row.combined_icon %}
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% comment %} <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+                </div> {% endcomment %}
+            </div>
+
+            <!-- Feedbacks details -->
+            <div class="col-12 xl:col-4">
+                <div class="card">
+                        <span class="block text-800 font-medium text-left mb-3">
+                            Feedbacks detail
+                        </span>
+                        <div class="text-color text-sm overflow-y-scroll h-auto">
+                            {% for row in feedbacks_info %}
+                                <div class="flex flex-row justify-content-between mt-1">
+
+                                {% if row.type == 'category' %}
+                                    <span class="flex flex-row justify-content-start border-top-2 border-0">
+                                        <i class="font-bold p-0 block {{ row.view_icon }} mr-0"></i>
+                                        <span class="text-color font-semibold">{{ row.name }}</span>
+                                    </span>
+                                    <span class="font-bold text-{{ row.view_color }} text-base">
+                                        {{ row.count }}
+                                    </span>
+
+                                {% elif row.type == 'type' %}
+                                    <span class="ml-6">{{ row.name }}</span>
+                                    <span class="mr-3">{{ row.count }}</span>
+
+                                {% endif %}
+                                </div>
+                                <div class="border-top-2 border-100"></div>
+                            {% endfor %}
+                        </div>
+                </div>
+            </div>
+
+            <!-- Feedbacks by feedbacks cateogries -->
+            <div class="col-12 xl:col-5">
+                <div class="card h-full">
+                    {% include 'components/Charts/RadarGraph.html' with id="feedbacks_graph" title="Feedbacks by job types" data=feedbacks_graph_data %}
+                </div>
+            </div>
+
+            <!-- Last feedbacks -->
+            <div class="col-12 xl:col-3">
+                <div class="card h-full col-4-ref">
+                    <div class="h-full overflow-x-scroll">
+                        <span class="block text-800 font-medium text-left mb-3">
+                            Last custom feedbacks
+                        </span>
+                        <div class="text-color">
+                            <p class="">No custom feedback posted.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    {% if campaign_info.is_finished %}
+    new Glide('#feedbacks_carousel', {
+        type: 'carousel',
+        autoplay: 3000,
+        hoverpause: true,
+        perView: 6,
+        focusAt: 'center',
+        breakpoints: {
+            1500: {
+                perView: 4
+            },
+            1292: {
+                perView: 4
+            },
+            1068: {
+                perView: 2
+            },
+            876: {
+                perView: 1
+            }
+        }
+      }).mount()
+      {% endif %}
+      new Glide('#compromised_by_carousel', {
+          type: 'carousel',
+          perView: 1,
+          focusAt: 0,
+        }).mount()
+</script>
+<script>
+new Modal('#modalOverlayNotes', {
+    type: 'side-right',
+    triggers: ['#openModalNotes'],
+    options: ['close-x'],
+});
+</script>
+{% endblock scripts %}

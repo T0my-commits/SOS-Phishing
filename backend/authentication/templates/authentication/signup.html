@@ -1,0 +1,27 @@
+{% extends 'head.html' %}
+{% load static %}
+
+{% block title %}
+  Login
+{% endblock title %}
+
+{% block header %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/apps/authentication/forms.css' %}">
+{% endblock header %}
+
+{% block body %}
+  <div class="container-centered">
+    <div class="">
+      <img src="{% static 'img/Logo of a blue sheet on a white background, with pen to the right.png' %}" class="container-centered-img" />
+      <h1 class="">Signup</h1>
+      <p>{{ message }}</p>
+      <form method="POST">
+          {{ form.as_p }}
+          {% csrf_token %}
+        <br />
+        <button type="submit" class="btn btn-primary">Signup</button>
+      </form>
+    </div>
+  </div>
+{% endblock body %}
+

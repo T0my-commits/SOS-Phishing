@@ -1,0 +1,29 @@
+{% load static %}
+
+<div class="information-card">
+    <div class="mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div class="">
+          <span class="block text-800 font-medium text-left mb-3">{{ title }}</span>
+          <div class="text-900 font-bold text-3xl">
+            <span class="information-card-nb">{{ text_big }}</span>
+            {% if text_medium %}
+              <span class="font-bold text-xl">{{ text_medium }}</span>
+            {% endif %}
+            {% if text_small %}
+              <span class="font-normal text-base">{{ text_small }}</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="flex text-3xl h-full align-items-center align-items-center justify-content-center icon-bg">
+          <i class="{{ icon }}" class="icon-shape"></i>
+        </div>
+      </div>
+      {% if subtitle_nb or subtitle_text %}
+        <div class="w-full text-left text-sm">
+            <span class="{{ subtitle_nb_color }} font-medium">{{ subtitle_nb }} </span>
+            <span class="text-500">{{ subtitle_text }}</span>
+        </div>
+      {% endif %}
+    </div>
+</div>

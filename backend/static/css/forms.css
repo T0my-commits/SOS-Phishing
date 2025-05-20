@@ -1,0 +1,68 @@
+select, 
+input, textarea {
+    position: relative;
+    font-family: Arial;
+    padding: 8px;
+    background-color: transparent;
+    border: 1px solid var(--surface-300);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+select:hover, 
+input:hover, textarea:hover {
+    border: 1px solid var(--surface-400);
+    transition: all 0.2s;
+}
+select select {
+    display: none;
+}
+
+textarea {
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+input[type="file"] {
+    border: 2px dotted var(--surface-300);
+    border-radius: 15px;
+    transition: var(--transition-medium);
+}
+/* input:focus {
+    border: 2px solid red;
+} */
+
+/* .select-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    transform: translateY(5px);
+}
+.select-button ul {
+    list-style-type: none;
+    padding: 4px 8px;
+    margin: 0;
+    display: flex;
+    gap: 10px;
+    background-color: var(--surface-100);
+    border-radius: 2px;
+}
+.select-button li {
+    padding: 2px 4px;
+    margin: 0 -2px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+}
+.select-button li.active {
+    background-color: var(--surface-card);
+}
+.select-button li a {
+    text-decoration: none;
+    color: var(--gray-600);
+    font-weight: bold;
+}
+.select-button li.active a {
+    color: var(--gray-800);
+} */

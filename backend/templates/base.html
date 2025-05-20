@@ -1,0 +1,142 @@
+{% extends 'head.html' %}
+{% load static %}
+
+{% block body %}
+    <!-- Draw a circle around cursor -->
+    <!--<div class="cursor-circle"></div>-->
+
+    <!-- Overlay with spinner -->
+    <div id="loadingOverlay">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Navbar -->
+    <section>
+      <div class="sidebar {% if not user.is_authenticated %}sidebar-active{% endif %} text-gray-900">
+        <!-- Contenu de la sidebar -->
+        <div class="sidebar-content">
+          <img class="app-logo" src="{% static 'img/renault_group_logo_blue.png' %}" />
+
+          {% if user.is_authenticated %}
+            <!-- Attack paths -->
+            <h2 class="sub-sub-title">Attack paths</h2>
+            <a class="bi bi-plus-circle" href="#new">New</a>
+            <a class="bi bi-bezier2" href="#projects-dashboard">Dashboards</a>
+
+            <!-- E-Mail campaigns -->
+            <h2 class="sub-sub-title">Phishing campaigns</h2>
+            <a class="bi bi-plus-circle" href="{% url "launch_phishing_campaign" %}">New</a>
+            <a class="bi bi-bar-chart" href="{% url "projects_dashboard" %}">Dashboards</a>
+
+            <!-- Templating -->
+            <h2 class="sub-sub-title">Templating</h2>
+            <a class="bi bi-pencil" href="#manage-templates">Phishing templates</a>
+            <a class="bi bi-window-fullscreen" href="#">Fake websites</a>
+            <a class="bi bi-arrows-fullscreen" href="#">Landing pages</a>
+            <a class="bi bi-bandaid" href="#">Remediations</a>
+            <a class="bi bi-card-list" href="#">Reflex cards</a>
+
+            <!-- Customization -->
+            <h2 class="sub-sub-title">Customization</h2>
+            <a class="bi bi-person" href="{% url "add_targets" %}">Targets</a>
+            <a class="bi bi-heart" href="{% url "add_interests" %}">Interests</a>
+            <a class="bi bi-building" href="{% url "add_place_of_work" %}">Places of work</a>
+            <a class="bi bi-suitcase-lg" href="">Job types</a>
+
+            <!-- Options -->
+            <h2 class="sub-sub-title">Miscellaneous</h2>
+            <a class="bi bi-envelope-paper" href="#news">News & upates</a>
+            <a class="bi bi-chat-right-dots" href="#manage-templates">Contact form</a>
+
+            <!-- Options -->
+            <h2 class="sub-sub-title">Options</h2>
+            <a class="bi bi-boxes" href="#manage-templates">Integration</a>
+            <a class="bi bi-people" href="#manage-templates">Operators management</a>
+          {% endif %}
+        </div>
+
+        <!-- Séparateur et boutons en bas -->
+        <hr>
+        <div class="bottom-links">
+        {% if user.is_authenticated %}
+          <a class="bi bi-person-circle {% if user.is_authenticated and user.is_staff or user.is_superuser %}sidebar-staff-icon{% endif %}" href="#user">
+            <span class="text-gray-900">{{ user.first_name }} {{ user.last_name }}</span>
+          </a>
+          <a class="bi bi-arrow-left-circle" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a class="bi bi-arrow-right-circle" href="{% url 'login' %}">Login</a>
+          {% comment %} <a class="bi bi-arrow-up-circle" href="{% url 'signup' %}">Signup</a> {% endcomment %}
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- Burger Menu -->
+    {% comment %} <section>
+      <div class="custom_menu-btn">
+        <button onclick="openNav()">
+          <span class="s-1"></span>
+          <span class="s-2"></span>
+          <span class="s-3"></span>
+        </button>
+        <div id="myNav" class="overlay">
+          <div class="overlay-content">
+            <a href="https://www.free-css.com/free-css-templates">Home</a> 
+            <a href="pages/about.php">About</a> 
+            <a href="pages/gallery.php">Gallery</a> 
+            <a href="pages/service.php">Service</a> 
+            <a href="pages/blog.php">Blog</a></div>
+        </div>
+      </div>
+    </section> {% endcomment %}
+
+    <!-- Main Content -->
+    <div id="main-container" class="container {% if not user.is_authenticated %}main-container-full{% endif %}">
+      <div id="page-header">
+        <!-- Burger button for sidebar -->
+        <div>
+          <img class="burger-btn-sidebar" src="{% static "icons/list.svg" %}">
+        </div>
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-section">
+          {% include 'partials/breadcrumb.html' with pages=breadcrumb_pages %}
+        </div>
+      </div>
+      <section class="main-content">
+
+        <!-- Toasts messages -->
+        {% if messages %}
+          {% for message in messages %}
+            <div class="toast {% if "auto-remove" in message.tags %}slow:fade-out{% endif %} {{ message.tags }} flex flex-row justify-content-between" onclick="removeToast(this)">
+              <p class="bi bi-bell">{{ message }}</p>
+              <i class="bi bi-x-lg" style="margin-right: -15px"></i>
+            </div>
+          {% endfor %}
+        {% endif %}
+        
+        <!-- Page content -->
+        {% if user.is_authenticated %}
+          {% block content %}
+          {% endblock content %}
+        {% else %}
+          <section class="container-centered">
+            <div class="">
+              <img src="{% static "img/renault_group_logo_blue.png" %}" class="app-logo" />
+              <p>Please log in to use features</p>
+              <a class="btn btn-primary" href="{% url "login" %}">Login</a>
+            </div>
+          </section>
+        {% endif %}
+      </section>
+
+      {% if user.is_authenticated %}
+        <section id="footer">
+          <div class="col-12">
+            <div class="separator"></div>
+          </div>
+          <p class="font-bold text-sm text-color-secondary mt-1 flex flex-row justify-content-center">@ShellPhishIT</p>
+        </section>
+        {% endif %}
+    </div>
+
+  </div>
+  {% endblock body %}

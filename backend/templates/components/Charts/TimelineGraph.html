@@ -1,0 +1,122 @@
+<div class="p-fluid">
+    <div class="flex flex-row justify-content-between align-content-center">
+        <span class="block text-800 font-medium text-left mb-3">{{ title }}</span>
+        <div class="select-button">
+            <ul>
+                <li id="select-line-compromises-by-date" onclick="changeCompromiseByDateType('line')" class="active"><a href="#">Line</a></li>
+                <li id="select-bar-compromises-by-date" onclick="changeCompromiseByDateType('bar')" class=""><a href="#">Bar</a></li>
+            </ul>
+        </div>
+    </div>
+    <canvas id="compromisesByDate" height="120"></canvas>
+</div>
+
+<script>
+    const activityTimeline = JSON.parse('{{ data|escapejs|safe }}');
+    let compromisesByDateChart;
+    function drawCompromiseByDate(chartType) {
+        // Initial setup
+        const safeChartType = escapeHtml(chartType);
+        if (compromisesByDateChart) {
+            compromisesByDateChart.destroy();
+        }
+        let documentStyle = getComputedStyle(document.documentElement);
+        let textColor = documentStyle.getPropertyValue('--text-color');
+        let textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        let surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+        const compromisesByDateData = {
+            labels: activityTimeline["labels"],
+            datasets: [
+                {
+                    label: 'Compromises',
+                    backgroundColor: documentStyle.getPropertyValue('--pink-500'),
+                    borderColor: documentStyle.getPropertyValue('--pink-500'),
+                    data: activityTimeline["data_compromises"],
+                    borderRadius: 5,
+                },
+                {
+                    label: 'Clicks',
+                    backgroundColor: documentStyle.getPropertyValue('--orange-500'),
+                    borderColor: documentStyle.getPropertyValue('--orange-500'),
+                    data: activityTimeline["data_clicks"],
+                    borderRadius: 5,
+                },
+                {
+                    label: 'Signalisations',
+                    backgroundColor: documentStyle.getPropertyValue('--yellow-500'),
+                    borderColor: documentStyle.getPropertyValue('--yellow-500'),
+                    data: activityTimeline["data_signalisations"],
+                    borderRadius: 5,
+                },
+                {
+                    label: 'Download attachment',
+                    backgroundColor: documentStyle.getPropertyValue('--purple-500'),
+                    borderColor: documentStyle.getPropertyValue('--purple-500'),
+                    data: activityTimeline["data_download_attachment"],
+                    borderRadius: 5,
+                },
+                {
+                    label: 'Open attachment',
+                    backgroundColor: documentStyle.getPropertyValue('--pink-300'),
+                    borderColor: documentStyle.getPropertyValue('--pink-300'),
+                    data: activityTimeline["data_open_attachment"],
+                    borderRadius: 5,
+                },
+                {
+                    label: 'Credentials leak',
+                    backgroundColor: documentStyle.getPropertyValue('--green-600'),
+                    borderColor: documentStyle.getPropertyValue('--green-600'),
+                    data: activityTimeline["data_creds_leak"],
+                    borderRadius: 5,
+                }
+            ]
+        };
+
+        const compromisesByDateOptions = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: textColorSecondary,
+                        font: { weight: 500 }
+                    },
+                    grid: {
+                        display: false,
+                        drawBorder: false
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: textColorSecondary
+                    },
+                    grid: {
+                        color: surfaceBorder,
+                        drawBorder: false
+                    }
+                }
+            }
+        };
+
+        // Render Chart
+        const compromisesByDateCtx = document.getElementById('compromisesByDate').getContext('2d');
+        compromisesByDateChart = new Chart(compromisesByDateCtx, {
+            type: safeChartType,
+            data: compromisesByDateData,
+            options: compromisesByDateOptions
+        });
+    }
+    function changeCompromiseByDateType(chartType) {
+        const safeChartType = escapeHtml(chartType);
+        document.getElementById('select-line-compromises-by-date').classList.toggle('active');
+        document.getElementById('select-bar-compromises-by-date').classList.toggle('active');
+        drawCompromiseByDate(safeChartType);
+    }
+    drawCompromiseByDate('line');
+</script>

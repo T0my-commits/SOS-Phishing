@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <!-- Headers -->
+  <head>
+    <title>{% block title %}Home{% endblock %} - SOS Phishing</title>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/globals.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_framework/containers.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_framework/text_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_framework/buttons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_framework/tables.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/datatable.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components/select_button/select_button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components/sidebar/sidebar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components/burger_menu/burger_menu.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components/cursor_bright/cursor_bright.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components/breadcrumb/breadcrumb.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components/summary_section/summary_section.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components/loading_overlay/loading_overlay.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components/toast/toasts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components/glide/glide_overwrite.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/primeflex.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/glide.core.min.css' %}">
+    {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/glide.theme.min.css' %}"> {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components/modal/modal.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components/toolkit-nav/toolkit-nav.css' %}">
+
+    <!-- Fonts -->
+    <link href="{% static 'fonts/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf' %}" type="font/ttf">
+    <link rel="preload" href="{% static '/fonts/Outfit-VariableFont_wght.ttf' %}" as="font" type="font/ttf" crossorigin="anonymous">
+    <link href="{% static 'fonts/NotoSans-VariableFont_wdth,wght.ttf' %}" type="font/ttf">
+    <link href="{% static 'fonts/AfacadFlux-VariableFont_slnt,wght.ttf' %}" type="font/ttf">
+
+    <!-- Icon -->
+    <link rel="icon" href="{% static 'img/SOS_logo.png' %}" type="image/icon type">
+
+    <!-- Chart.js -->
+    <script src="{% static 'js/chart.js' %}"></script>
+    <script src="{% static 'js/utils.js' %}"></script>
+
+    <style>
+      @font-face {
+          font-family: 'Outfit';
+          src: url("{% static '/fonts/Outfit-VariableFont_wght.ttf' %}") format('truetype');
+          font-weight: 100 900;
+          font-style: normal;
+      }
+    </style>
+
+    <!-- Page relative -->
+    {% block header %}
+    {% endblock header %}
+  </head>
+
+  <body>
+    <!-- Body page -->
+    {% block body %}{% endblock body %}
+
+  <!-- JS scripts -->
+  <script src="{% static 'js/burger_menu.js' %}"></script>
+  <script src="{% static 'js/sidebar_toggle.js' %}"></script>
+  <script src="{% static 'js/loadingOverlay.js' %}"></script>
+  <script src="{% static 'js/toasts.js' %}"></script>
+  <script src="{% static 'js/glide.min.js' %}"></script>
+  <script src="{% static 'js/modal.js' %}"></script>
+
+  <!-- Tables -->
+  <script src="{% static 'js/dt_locales.js' %}"></script>
+  <script src="{% static 'js/datatable-ng.js' %}"></script>
+
+  {% block scripts %}{% endblock scripts %}
+  </body>
+</html>

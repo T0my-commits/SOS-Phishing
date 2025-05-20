@@ -1,0 +1,92 @@
+<div class="p-fluid flex flex-column align-items-center">
+    <span class="block text-800 font-medium text-left mb-3">{{ title }}</span>
+     <canvas id="{{ id }}" {% comment %}class="md:h-22rem"{% endcomment %}></canvas>
+</div>
+
+<script>
+    function drawCompromiseByCategories() {
+        const compromisesCategories = JSON.parse('{{ data|escapejs|safe }}');
+
+        let documentStyle = getComputedStyle(document.documentElement);
+        let textColor = documentStyle.getPropertyValue('--text-color');
+        let textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        let surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+        
+        const colors_25 = [
+            'rgba(99, 102, 241, 0.25)',   // --indigo-500: #6366f1
+            'rgba(168, 85, 247, 0.25)',   // --purple-500: #a855f7
+            'rgba(20, 184, 166, 0.25)',   // --teal-500: #14b8a6
+            'rgba(6, 182, 212, 0.25)',    // --cyan-500: #06b6d4
+            'rgba(236, 72, 153, 0.25)',   // --pink-500: #ec4899
+            'rgba(34, 197, 94, 0.25)',    // --green-500: #22c55e
+            'rgba(59, 130, 246, 0.25)',   // --blue-500: #3b82f6
+            'rgba(100, 116, 139, 0.25)',  // --bluegray-500: #64748b
+            'rgba(255, 61, 50, 0.25)',    // --red-500: #ff3d32
+            'rgba(249, 115, 22, 0.25)',   // --orange-500: #f97316
+            'rgba(59, 130, 246, 0.25)',   // --primary-500: #3b82f6
+            'rgba(234, 179, 8, 0.25)',    // --yellow-500: #eab308
+            'rgba(158, 158, 158, 0.25)'   // --gray-500: #9E9E9E
+        ];
+        const colors_100 = [
+            'rgba(99, 102, 241)',   // --indigo-500: #6366f1
+            'rgba(168, 85, 247)',   // --purple-500: #a855f7
+            'rgba(20, 184, 166)',   // --teal-500: #14b8a6
+            'rgba(6, 182, 212)',    // --cyan-500: #06b6d4
+            'rgba(236, 72, 153)',   // --pink-500: #ec4899
+            'rgba(34, 197, 94)',    // --green-500: #22c55e
+            'rgba(59, 130, 246)',   // --blue-500: #3b82f6
+            'rgba(100, 116, 139)',  // --bluegray-500: #64748b
+            'rgba(255, 61, 50)',    // --red-500: #ff3d32
+            'rgba(249, 115, 22)',   // --orange-500: #f97316
+            'rgba(59, 130, 246)',   // --primary-500: #3b82f6
+            'rgba(234, 179, 8)',    // --yellow-500: #eab308
+            'rgba(158, 158, 158)'   // --gray-500: #9E9E9E
+        ];
+
+        let myDatasetCompromiseByCategories = [];
+        let i = 0;
+        compromisesCategories['data'].forEach(item => {
+            myDatasetCompromiseByCategories.push({
+                label: item['job_type_name'],
+                data: item['job_type_data'],
+                fill: true,
+                backgroundColor: colors_25[i% colors_25.length],
+                borderColor: colors_100[i % colors_100.length],
+                pointBackgroundColor: colors_100[i % colors_100.length],
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: colors_100[i % colors_100.length]
+            });
+            i = i + 1;
+        });
+    
+
+        // Pie Chart data and options
+        const compromisesByCategoriesData = {
+            labels: compromisesCategories['labels'],
+            datasets: myDatasetCompromiseByCategories
+        };
+
+        const compromisesByCategoriesOptions = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor,
+                        usePointStyle: true
+                    }
+                }
+            }
+        };
+
+        // Render the chart
+        const compromisesByCategoriesCtx = document.getElementById('{{ id|escapejs|safe }}').getContext('2d');
+        const compromisesByCategoriesChart = new Chart(compromisesByCategoriesCtx, {
+            type: 'radar',
+            data: compromisesByCategoriesData,
+            options: compromisesByCategoriesOptions
+        });
+
+        console.log(myDatasetCompromiseByCategories);
+    };
+    drawCompromiseByCategories();
+</script>

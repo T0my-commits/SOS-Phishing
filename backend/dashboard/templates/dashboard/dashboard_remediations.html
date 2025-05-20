@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Dashboard
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+  <div class="w-full">
+    <div class="flex flex-row justify-content-between align-content-center">
+        <h2>Dashboard</h2>
+        <div class="flex">
+            <div class="select-button">
+                <ul class="mr-1">
+                    <li><a href="/dashboard/{{ url_id }}/technical/" onclick="showLoadingOverlay()">Technical</a></li>
+                    <li><a href="/dashboard/{{ url_id }}/business/" onclick="showLoadingOverlay()">Business</a></li>
+                </ul>
+                {% if campaign_info.is_finished %}
+                <ul class="mr-1">
+                    <li class="active"><a href="{% url 'dashboard_remediations' campaign_url_id=campaign.url_id %}" onclick="showLoadingOverlay()">Remediations</a></li>
+                </ul>
+                {% endif %}
+                <ul>
+                    <li><a href="/dashboard/{{ url_id }}/options/" onclick="showLoadingOverlay()">Options</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="grid">
+        <!-- Remediation global -->
+        <div class="col-12 xl:col-6">
+            <div class="card h-full">
+                <span class="block text-800 font-medium text-left mb-3">
+                    Global remediation
+                </span>
+                <p>Some text</p>
+                <button id="openModalGlobal" class="btn btn-primary">Send remediation</button>
+            </div>
+        </div>
+        <!-- Overlay -->
+        <div id="modalOverlayGlobal" class="overlay hidden">
+            <!-- Fenêtre modale -->
+            <div class="modal">
+                <h2>Send global remediation</h2>
+                <p>Are your sure you want to send a global remediation?</p>
+                <div class="flex flex-row justify-content-end gap-1">
+                    <button class="btn btn-secondary">Cancel</button>
+                    <button class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remediation specific -->
+        <div class="col-12 xl:col-6">
+            <div class="card h-full">
+                <span class="block text-800 font-medium text-left mb-3">
+                    Specific remediation
+                </span>
+                <p>Some text</p>
+                <button id="openModalSpecific" class="btn btn-primary">Send remediation</button>
+            </div>
+        </div>
+        <!-- Overlay -->
+        <div id="modalOverlaySpecific" class="overlay hidden">
+            <!-- Fenêtre modale -->
+            <div class="modal">
+                <h2>Send specific remediation</h2>
+                <p>Are your sure you want to send a specific remediation?</p>
+                <div class="flex flex-row justify-content-end gap-1">
+                    <button class="btn btn-secondary">Cancel</button>
+                    <button class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formation request -->
+        <div class="col-12 xl:col-6">
+            <div class="card h-full">
+                <span class="block text-800 font-medium text-left mb-3">
+                    Formation request
+                </span>
+                <p>Some text</p>
+                <button id="openModalFormationRequest" class="btn btn-primary">Send request</button>
+            </div>
+        </div>
+        <!-- Overlay -->
+        <div id="modalOverlayFormationRequest" class="overlay hidden">
+            <!-- Fenêtre modale -->
+            <div class="modal">
+                <h2>Send formation request</h2>
+                <p>Are your sure you want to request a formation as remediation?</p>
+                <div class="flex flex-row justify-content-end gap-1">
+                    <button class="btn btn-secondary">Cancel</button>
+                    <button class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+new Modal('#modalOverlayGlobal', {
+    type: 'card-center',
+    triggers: ['#openModalGlobal'],
+    options: [],
+});
+new Modal('#modalOverlaySpecific', {
+    type: 'card-center',
+    triggers: ['#openModalSpecific'],
+    options: [],
+});
+new Modal('#modalOverlayFormationRequest', {
+    type: 'card-center',
+    triggers: ['#openModalFormationRequest'],
+    options: [],
+});
+</script>
+{% endblock scripts %}

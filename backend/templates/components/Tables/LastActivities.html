@@ -1,0 +1,66 @@
+{% comment %} {% load json_script %} {% endcomment %}
+
+<span class="block text-800 font-medium text-left mb-3">Last activities</span>
+<div class="table-wrapper">
+    <table id="last_activities" class="style-table-2" style="font-size: 0.96rem;"></table>
+    <div class="pagination"></div>
+</div>
+
+{% comment %} {% data|json_script:"data_json" %} {% endcomment %}
+<script>
+    const recentActivities = JSON.parse('{{ data|escapejs|safe }}');
+    {% comment %} recentActivities = JSON.parse(document.getElementById('data_json').textContent); {% endcomment %}
+    const columnsOpt = [
+        {
+            key: 'country',
+            header: 'Country',
+            icon: 'bi bi-sort-down',
+            template: row => row.country ? row.country : ''
+        },
+        {
+            key: 'place_of_work',
+            header: 'Place of work',
+            icon: 'bi bi-arrow-down-up',
+            template: row => row.place_of_work ? row.place_of_work : 'Unknown'
+        },
+        {
+            key: 'job_type',
+            header: 'Job type',
+            icon: 'bi bi-arrow-down-up',
+            template: row => row.job_type ? row.job_type : 'None'
+        },
+        {
+            key: 'interests',
+            header: 'Interests',
+            icon: 'bi bi-arrow-down-up',
+            template: row => row.interests ? row.interests.join(', ') : 'None'
+        },
+        {
+            key: 'payload_sent_at',
+            header: 'Payload sent at',
+            icon: 'bi bi-arrow-down-up',
+            template: row => row.payload_sent_at ? new Date(row.payload_sent_at).toLocaleString('en-US', { timeZone: 'UTC' }) : ''
+        },
+        {
+            key: 'event_date',
+            header: 'Event date',
+            icon: 'bi bi-arrow-down-up',
+            template: row => row.event_date ? new Date(row.event_date).toLocaleString('en-US', { timeZone: 'UTC' }) : ''
+        },
+        {
+            key: 'event_label',
+            header: 'Activity',
+            icon: 'bi bi-arrow-down-up',
+            template: row => row.event_label ? row.event_label : 'None'
+        }
+    ];
+
+    // Generate table
+    displayTable({
+        data: recentActivities,
+        page: 1,
+        tableSelector: '#last_activities',
+        columnsOpt: columnsOpt,
+        rowsPerPage: 5
+    });
+</script>

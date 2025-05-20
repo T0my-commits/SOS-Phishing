@@ -1,0 +1,24 @@
+#summary-sections {
+  list-style-type: none;
+}
+#summary-sections li a {
+  text-decoration: none;
+  /*color: #6c757d;*/
+  color: black;
+  font-size: 0.9rem;
+}
+#summary-sections li a:hover {
+  text-decoration: underline;
+}
+#summary-sections li a.active {
+  font-weight: bold;
+  transform: translateX(-42px);
+}
+/*#summary-sections li::before {*/
+/*  content: '→';*/
+/*  position: absolute;*/
+/*  left: 45px;*/
+/*  font-size: 18px;*/
+/*  color: #6c757d;*/
+/*}*/
+

@@ -1,0 +1,68 @@
+/* Conteneur de la grille */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1rem; /* Espace entre les colonnes */
+    width: 100%;
+    align-items: flex-start;
+}
+
+/* Classes de colonnes */
+[class*="col-"] {
+    flex: 1 1 calc(100% - var(--padding-main-content) - 2.7rem);
+}
+
+/* Colonne 12 : 100% */
+.col-12 {
+    flex: 0 0 calc(100% - var(--padding-main-content) - 2.7rem);
+    max-width: 100%;
+}
+
+/* Colonne 6 : 50% */
+.col-6 {
+    flex: 0 0 calc(50% - var(--padding-main-content) - 3.3rem);
+    max-width: 50%;
+}
+
+/* Colonne 4 : 33.33% */
+.col-4 {
+    flex: 0 0 calc(33.33% - var(--padding-main-content) - 3.4rem);
+    max-width: 33.33%;
+}
+
+/* Colonne 3 : 25% */
+.col-3 {
+    flex: 0 0 calc(25% - var(--padding-main-content) - 3.4rem);
+    max-width: 25%;
+}
+
+/* Points de rupture pour la réactivité */
+@media (width < 1024px) {
+    .col-lg-4 {
+        flex: 0 0 calc(33.33% - var(--padding-main-content) - 3.4rem);
+        max-width: 33.33%;
+    }
+
+    .col-lg-3 {
+        flex: 0 0 calc(25% - var(--padding-main-content) - 3.4rem);
+        max-width: 25%;
+    }
+}
+
+@media (width < 768px) {
+    .col-md-6 {
+        flex: 0 0 calc(50% - var(--padding-main-content) - 3.3rem);
+        max-width: 50%;
+    }
+
+    .col-md-4 {
+        flex: 0 0 calc(33.33% - var(--padding-main-content) - 3.4rem);
+        max-width: 33.33%;
+    }
+
+    .col-md-3 {
+        flex: 0 0 calc(25% - var(--padding-main-content) - 3.4rem);
+        max-width: 25%;
+    }
+}

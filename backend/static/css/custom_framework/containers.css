@@ -1,0 +1,79 @@
+#main-container {
+    margin-left: var(--sidebar-width);
+    margin-right: 2rem;
+    min-height: 97vh;
+    transition: var(--transition-slow);
+    padding: var(--padding-main-content);
+}
+
+.main-container-full {
+    margin-left: 0 !important;
+    transition: var(--transition-slow);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.container-centered div {
+    text-align: center;
+    padding: 40px;
+    width: 25vw;
+}
+.container-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    width: 100vw;
+    text-align: center;
+}
+.container-centered-img {
+    width: 80px;
+    height: 80px;
+}
+
+.main-content {
+    /* display: flex; */
+    flex: 1 1 auto;
+}
+
+#page-header {
+    display: flex;
+    align-items: center;
+}
+
+.card {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  background: var(--surface-card);
+  border: 1px solid rgba(221, 224, 255, .7);
+  padding: 2em;
+  margin: 0;
+  /* margin: 0.2rem !important; */
+  box-shadow: var(--primary-box-shadow);
+  border-radius: var(--border-radius-card);
+  text-align: justify;
+  height: auto;
+}
+.shadow-primary-box {
+  box-shadow: var(--primary-box-shadow) !important;
+}
+
+.information-card img {
+    margin-top: -25px;
+    margin-left: 34px;
+}
+.information-card .icon-bg {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 30px;
+    margin-right: -20px;
+}
+@media (min-width: 1500px) and (max-width: 1630px) {
+.information-card .icon-shape {
+        font-size: 1.6rem !important;
+    }
+}

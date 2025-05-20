@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    My Projects
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+    <section class="w-full">
+        <div class="w-full">
+            <div class="flex flex-row justify-content-between align-content-center">
+                <h2>Campaigns dashboard</h2>
+            </div>
+            <div class="grid">
+                <!-- My Campaigns -->
+                <div class="col-12">
+                    <div class="card">
+                        <span class="block text-800 font-medium text-left mb-3">My Campaigns</span>
+                        {% if client_campaigns %}
+                            <table id="mycampaigns" data-style="style-table-1" data-replace="jtable" data-row-per-page=5 data-hide-top-panel="true" data-locale="en">
+                                <thead>
+                                    <tr>
+                                        <th class="bi bi-sort-down">Name</th>
+                                        <th class="bi bi-arrow-down-up">Created at</th>
+                                        <th class="bi bi-arrow-down-up">Started at</th>
+                                        <th class="bi bi-arrow-down-up">Ended at</th>
+                                        <th class="bi bi-arrow-down-up">Payloads sent</th>
+                                        <th class="bi bi-arrow-down-up">Compromised</th>
+                                        <th class="bi bi-arrow-down-up">Type</th>
+                                        <th class="bi bi-arrow-down-up">Mode</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for el in client_campaigns %}
+                                    <tr>
+                                        <td><a class="bi bi-lock" href="{% url 'dashboard_technical' campaign_url_id=el.url_id %}" onclick="showLoadingOverlay()">{{ el.name }}</a></td>
+                                        <td>{{ el.created_at }}</td>
+                                        <td>{{ el.start_date }}</td>
+                                        <td>{{ el.end_date }}</td>
+                                        <td>{{ el.messages_sent }}</td>
+                                        <td>{{ el.targets_compromises }}</td>
+                                        <td>{{ el.type }}</td>
+                                        <td>{{ el.mode }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p class="text-center w-full">No started campaign</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- My Archives -->
+                <div class="col-12">
+                    <div class="card">
+                        <span class="block text-800 font-medium text-left mb-3">My Archives</span>
+                        {% if client_archive %}
+                            <table id="mycampaigns" data-style="style-table-1" data-replace="jtable" data-row-per-page=5 data-hide-top-panel="true" data-locale="en">
+                                <thead>
+                                    <tr>
+                                        <th class="bi bi-sort-down">Name</th>
+                                        <th class="bi bi-arrow-down-up">Created at</th>
+                                        <th class="bi bi-arrow-down-up">Started at</th>
+                                        <th class="bi bi-arrow-down-up">Ended at</th>
+                                        <th class="bi bi-arrow-down-up">Payloads sent</th>
+                                        <th class="bi bi-arrow-down-up">Compromised</th>
+                                        <th class="bi bi-arrow-down-up">Type</th>
+                                        <th class="bi bi-arrow-down-up">Mode</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for el in client_archive %}
+                                    <tr>
+                                        <td><a href="{% url 'dashboard_technical' campaign_url_id=el.url_id %}" onclick="showLoadingOverlay()">{{ el.name }}</a></td>
+                                        <td>{{ el.created_at }}</td>
+                                        <td>{{ el.start_date }}</td>
+                                        <td>{{ el.end_date }}</td>
+                                        <td>{{ el.messages_sent }}</td>
+                                        <td>{{ el.targets_compromises }}</td>
+                                        <td>{{ el.type }}</td>
+                                        <td>{{ el.mode }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p class="text-center w-full">No archived campaign</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

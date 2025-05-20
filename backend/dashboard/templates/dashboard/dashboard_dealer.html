@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Dashboard
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+  <div class="w-full">
+    <div class="flex flex-row justify-content-between align-content-center">
+        <h2>Dashboard</h2>
+        <div class="flex">
+            <div class="select-button">
+                <ul class="mr-1">
+                    <li><a href="/dashboard/{{ url_id }}/technical/" onclick="showLoadingOverlay()">Technical</a></li>
+                    {% comment %} <li class="active"><a href="/dashboard/{{ url_id }}/dealer/" onclick="showLoadingOverlay()">Dealer</a></li> {% endcomment %}
+                    <li><a href="/dashboard/{{ url_id }}/business/" onclick="showLoadingOverlay()">Business</a></li>
+                </ul>
+                <ul>
+                    <li><a href="/dashboard/{{ url_id }}/options/" onclick="showLoadingOverlay()">Options</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+      <div class="grid">
+
+        <!-- Activity timeline -->
+        <div class="col-12 xl:col-8">
+          <div class="card h-full">
+            {% include 'components/Charts/TimelineGraph.html' with title="Timeline of activities" data=activity_timeline %}
+          </div>
+         </div>
+
+        <!-- Compromises by activities -->
+        <div class="col-12 xl:col-4">
+          <div class="card h-full">
+            {% include 'components/Charts/PieGraph.html' with id="stats_by_activities_graph" title="Compromises by activities" type="pie" data=stats_by_activities_graph_data %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

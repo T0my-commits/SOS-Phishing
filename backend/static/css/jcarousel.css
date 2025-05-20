@@ -1,0 +1,56 @@
+/* Carrousel */
+.jcarousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    /* box-shadow: var(--primary-box-shadow); */
+  }
+  
+  .jcarousel {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+  
+  .jcarousel::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .jcarousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 2.4rem;
+    height: 2.4rem;
+    padding: 0;
+    border-radius: 100%;
+    color: var(--surface-0);
+    background-color: var(--primary-color);
+    z-index: 10;
+  }
+  
+  .jcarousel-btn.left, .tns-outer button[data-controls="prev"] {
+    left: 0;
+    background-color: var(--hovered-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--surface-400);
+    /* background: linear-gradient(to left, var(--primary-bg-color), transparent); */
+  }
+  
+  .jcarousel-btn.right, .tns-outer button[data-controls="next"] {
+    right: 0;
+    color: var(--surface-0);
+    background-color: var(--primary-color-c50);
+    /* background: linear-gradient(to right, var(--primary-bg-color), transparent); */
+  }
+  
+  .jcarousel-btn:disabled {
+    visibility: hidden;
+  }

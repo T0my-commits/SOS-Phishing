@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Dashboard
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<div class="w-full">
+  <div class="flex flex-row justify-content-between align-content-center">
+      <h2>Dashboard</h2>
+      <div class="flex">
+          <div class="select-button">
+              <ul class="mr-1">
+                  <li><a href="/dashboard/{{ url_id }}/technical/" onclick="showLoadingOverlay()">Technical</a></li>
+                  {% comment %} <li><a href="/dashboard/{{ url_id }}/dealer/" onclick="showLoadingOverlay()">Dealer</a></li> {% endcomment %}
+                  <li class="active"><a href="/dashboard/{{ url_id }}/business/" onclick="showLoadingOverlay()">Business</a></li>
+              </ul>
+              {% if campaign_info.is_finished %}
+              <ul class="mr-1">
+                  <li><a href="{% url 'dashboard_remediations' campaign_url_id=campaign.url_id %}" onclick="showLoadingOverlay()">Remediations</a></li>
+              </ul>
+              {% endif %}
+              <ul>
+                  <li><a href="/dashboard/{{ url_id }}/options/" onclick="showLoadingOverlay()">Options</a></li>
+              </ul>
+          </div>
+      </div>
+  </div>
+
+      <div class="grid">
+
+        <!-- Information cards -->
+        <div class="col-12 md:col-6 xl:col-3">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Sample size" text_medium=campaign_info.sent text_small="targets" subtitle_nb=campaign_info.to_be_sent subtitle_text="must be sent" subtitle_nb_color="text-green-500" icon="bi bi-send text-blue-500" %}
+            </div>
+        </div>
+        <div class="col-12 md:col-6 xl:col-3">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Level of user vigilance" text_medium=campaign_info.user_vigilance_label text_small="" subtitle_nb=campaign_info.user_vigilance_text subtitle_text=" of vigilance" subtitle_nb_color="text-blue-600" icon='bi bi-eye text-indigo-500' %}
+            </div>
+        </div>
+        <div class="col-12 md:col-6 xl:col-3">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Global Training Efficiency" text_medium="Low" text_small="" subtitle_nb="55%" subtitle_text="of efficiency" subtitle_nb_color="text-orange-600" icon='bi bi-percent text-orange-500' %}
+            </div>
+        </div>
+        <div class="col-12 md:col-6 xl:col-3">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Attempts reported" text_medium=campaign_info.current_signaling_label text_small="" subtitle_nb=campaign_info.expected_signaling_text subtitle_text="of attempts reported" subtitle_nb_color="text-yellow-500" icon='bi bi-exclamation-circle text-yellow-500' %}
+            </div>
+        </div>
+
+        <!-- Activity timeline -->
+        <div class="col-12 xl:col-8">
+          <div class="card h-full">
+            {% include 'components/Charts/TimelineGraph.html' with title="Timeline of activities" data=activity_timeline %}
+          </div>
+         </div>
+
+        <!-- Compromises by activities -->
+        <div class="col-12 xl:col-4">
+          <div class="card h-full">
+            {% include 'components/Charts/PieGraph.html' with id="stats_by_activities_graph" title="Compromises by activities" type="pie" data=stats_by_activities_graph_data %}
+          </div>
+        </div>
+
+        {% comment %} <div class="col-12 md:col-6 xl:col-3">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Compromised users" text_medium=campaign_info.percentage_compromises_label text_small="" subtitle_text="persons compromised" subtitle_nb=campaign_info.percentage_compromises_text subtitle_nb_color="text-red-500" icon='bi bi-exclamation-triangle text-red-500' %}
+            </div>
+        </div> {% endcomment %}
+        <div class="col-12 md:col-6 xl:col-4">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Attack leverage" text_medium="Fear" text_small="" subtitle_nb="" subtitle_text="" subtitle_nb_color="text-pink-600" icon='bi bi-diagram-3 text-pink-500' %}
+            </div>
+        </div>
+        <div class="col-12 md:col-6 xl:col-4">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Attack vector" text_medium=campaign_info.mode text_small='' subtitle_nb="" subtitle_text="" subtitle_nb_color="" icon='bi bi-arrows-move text-cyan-500' %}
+            </div>
+        </div>
+        <div class="col-12 md:col-6 xl:col-4">
+            <div class="card h-full">
+                {% include 'components/Cards/InformationCard.html' with title="Duration of the attack" text_medium=campaign_info.days_elapsed text_small='day(s)' subtitle_nb=campaign_info.hours_remaining subtitle_text="remaining" subtitle_nb_color="text-yellow-600" icon='bi bi-clock text-yellow-500' %}
+            </div>
+        </div>
+ 
+        <div class="col-12">
+          <div class="card flex flex-row flex-wrap justify-content-between h-full">
+            <!-- Compromises by categories -->
+            {% include 'components/Charts/PieGraph.html' with id="compromises_graph" title="Compromises by categories" type="polarArea" data=compromises_graph_data %}
+            
+            <!-- Open attachments by categories -->
+            {% include 'components/Charts/PieGraph.html' with id="open_attachments_graph" title="Open attachments by categories" type="polarArea" data=open_attachments_graph_data %}
+            
+            <!-- Credentials leak by categories -->
+            {% include 'components/Charts/PieGraph.html' with id="credentials_leak_graph" title="Credentials leaking by categories" type="polarArea" data=credentials_leak_graph_data %}
+
+            <!-- Reports by categories -->
+            {% include 'components/Charts/PieGraph.html' with id="reports_graph" title="Reports by categories" type="polarArea" data=reports_graph_data %}
+          </div>
+        </div>
+
+        <!-- Reports by categories -->
+        {% comment %} <div class="col-12 xl:col-4">
+          <div class="card h-full h-5 ">
+            {% include 'components/Charts/PieGraph.html' with id="reports_graph" title="Reports by categories" type="polarArea" data=reports_graph_data %}
+          </div>
+        </div> {% endcomment %}
+
+        {% comment %} <!-- All stats by categories -->
+        <div class="col-12 xl:col-6">
+          <div class="card h-full">
+            {% include 'components/Charts/RadarGraph.html' with id="all_stats_graph" title="All statistics by categories" data=all_stats_graph_data %}
+          </div>
+        </div>
+        <!-- Feedbacks stats by categories -->
+        <div class="col-12 xl:col-6">
+          <div class="card h-full">
+            {% include 'components/Charts/RadarGraph.html' with id="all_stats_graph" title="Feedbacks statistics by categories" data="" %}
+          </div>
+        </div> {% endcomment %}
+
+      </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
