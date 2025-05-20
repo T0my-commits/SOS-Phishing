@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+    <div class="w-full">
+        <div class="flex flex-row justify-content-between align-content-center">
+            <h2>Start a new phishing campaign</h2>
+        </div>
+
+        <div class="grid w-full">
+
+            <form action="{% url 'launch_phishing_campaign' %}" method="POST" class="w-full">
+                {% csrf_token %}
+            
+                <!-- Section: General Information -->
+                <div class="w-full col-12">
+                    <div class="card flex flex-column gap-2 align-items-start">
+                        <span class="tag tag-blue mb-2 pl-3 pr-4 bi bi-info-circle">General Information</span>
+            
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+            
+                        {{ form.type.label_tag }}
+                        {{ form.type }}
+            
+                        {{ form.mode.label_tag }}
+                        {{ form.mode }}
+            
+                        {{ form.expected_signaling.label_tag }}
+                        {{ form.expected_signaling }}
+            
+                        {{ form.compromise_type.label_tag }}
+                        {{ form.compromise_type }}
+            
+                        {{ form.start_date.label_tag }}
+                        {{ form.start_date }}
+            
+                        {{ form.end_date.label_tag }}
+                        {{ form.end_date }}
+            
+                        {{ form.description.label_tag }}
+                        {{ form.description }}
+                    </div>
+                </div>
+            
+                <div class="w-full col-12">
+                    <div class="card flex flex-column gap-2 align-items-start">
+                        <span class="tag tag-orange mb-2 pl-3 pr-4 bi bi-info-circle">Select Users</span>
+                        {{ form.targets.label_tag }}
+                        {{ form.targets }}
+                    </div>
+                </div>
+            
+                <div class="w-full col-12">
+                    <div class="card flex flex-column gap-2 align-items-start">
+                        <input type="submit" value="Start a new campaign" class="btn btn-primary mt-3" />
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

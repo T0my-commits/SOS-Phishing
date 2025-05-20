@@ -1,0 +1,17 @@
+.tabview-custom {
+    padding: 0rem;
+}
+
+.tabview-custom .p-button {
+    background: var(--primary-color);
+    border: none;
+    height: 3rem;
+}
+
+.tabview-custom .p-button-outlined {
+    color: #000;
+    background: var(--lightgrey-100);
+}
+.tabview-custom .p-button-outlined:hover {
+    background: var(--primary-color-c15);
+}

@@ -1,0 +1,11 @@
+/* Overwrite .p-menubar */
+.p-menubar, .p-panelmenu-panel {
+  border: none;
+  width: 102%;
+  transform: translateX(-1.3rem);
+}
+
+.p-toggleable-content {
+  background-color: #f4f4ff;
+  border-radius: 50px;
+}

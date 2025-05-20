@@ -1,0 +1,32 @@
+:root {
+  /* Colors */
+  --primary-color: #6366f1;
+  --primary-color-c15: #6365f12a;
+  --secondary-color: #10b981;
+  --text-color: #4b5563;
+  --lightgrey-100: #f3f3f3;
+
+  /* Durations */
+  --transition-fast: 0.15s;
+  --transition-medium: 0.30s;
+  --transition-slow: 0.50s;
+
+  /* Width & Height */
+  /* ... */
+}
+
+strong {
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+
+.info-icon {
+  color: grey;
+  font-size: 0.8rem;
+}
+
+.app-logo {
+  background-color: var(--primary-color);
+  opacity: 0.88;
+}
+

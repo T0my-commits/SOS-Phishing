@@ -1,0 +1,73 @@
+<div class="p-fluid flex flex-column align-items-center {{ height }}">
+    <span class="block text-800 font-medium text-left mb-3">{{ title }}</span>
+     <canvas id="{{ id }}" {% comment %}class="md:h-22rem"{% endcomment %}></canvas>
+</div>
+
+<script>
+    function drawCompromiseByCategories() {
+        const compromisesCategories = JSON.parse('{{ data|escapejs|safe }}');
+        // Initial setup for colors
+        let documentStyle = getComputedStyle(document.documentElement);
+        let textColor = documentStyle.getPropertyValue('--text-color');
+        let textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        let surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+
+        // Pie Chart data and options
+        const compromisesByCategoriesData = {
+            labels: compromisesCategories["labels"],
+            datasets: [{
+                data: compromisesCategories["data"],
+                backgroundColor: [
+                    documentStyle.getPropertyValue('--indigo-500'),
+                    documentStyle.getPropertyValue('--purple-500'),
+                    documentStyle.getPropertyValue('--teal-500'),
+                    documentStyle.getPropertyValue('--cyan-500'),
+                    documentStyle.getPropertyValue('--pink-500'),
+                    documentStyle.getPropertyValue('--yellow-500'),
+                    documentStyle.getPropertyValue('--green-500'),
+                    documentStyle.getPropertyValue('--blue-500'),
+                    documentStyle.getPropertyValue('--bluegray-500'),
+                    documentStyle.getPropertyValue('--red-500'),
+                    documentStyle.getPropertyValue('--orange-500'),
+                    documentStyle.getPropertyValue('--primary-500'),
+                    documentStyle.getPropertyValue('--gray-500')
+                ],
+                hoverBackgroundColor: [
+                    documentStyle.getPropertyValue('--indigo-400'),
+                    documentStyle.getPropertyValue('--purple-400'),
+                    documentStyle.getPropertyValue('--teal-400'),
+                    documentStyle.getPropertyValue('--cyan-400'),
+                    documentStyle.getPropertyValue('--pink-400'),
+                    documentStyle.getPropertyValue('--yellow-400'),
+                    documentStyle.getPropertyValue('--green-400'),
+                    documentStyle.getPropertyValue('--blue-400'),
+                    documentStyle.getPropertyValue('--bluegray-400'),
+                    documentStyle.getPropertyValue('--red-400'),
+                    documentStyle.getPropertyValue('--orange-400'),
+                    documentStyle.getPropertyValue('--primary-400'),
+                    documentStyle.getPropertyValue('--gray-400')
+                ]
+            }]
+        };
+
+        const compromisesByCategoriesOptions = {
+            plugins: {
+                legend: {
+                    labels: {
+                        color: textColor,
+                        usePointStyle: true
+                    }
+                }
+            }
+        };
+
+        // Render the chart
+        const compromisesByCategoriesCtx = document.getElementById('{{ id|escapejs|safe }}').getContext('2d');
+        const compromisesByCategoriesChart = new Chart(compromisesByCategoriesCtx, {
+            type: '{{ type|escapejs|safe }}',
+            data: compromisesByCategoriesData,
+            options: compromisesByCategoriesOptions
+        });
+    };
+    drawCompromiseByCategories();
+</script>

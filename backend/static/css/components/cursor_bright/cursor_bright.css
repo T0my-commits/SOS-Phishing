@@ -1,0 +1,14 @@
+.cursor-circle {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #006666;
+  background-color: transparent;
+  pointer-events: none; /* Empêche d'interagir avec le rond */
+  transform: translate(-50%, -50%); /* Centre le rond */
+  transition: width 0.1s, height 0.1s; /* Transition fluide */
+  box-shadow: 0 0 10px #006666;
+  opacity: 0.7;
+}
+

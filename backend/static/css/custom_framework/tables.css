@@ -1,0 +1,148 @@
+/* ---- Generic ---- */
+table[class^="style-table-"] {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1em;
+    font-family: "Outfit", "Nunito Sans", Arial, Helvetica, sans-serif;
+    white-space: nowrap;
+    color: var(--text-color);
+}
+
+table[class^="style-table-"] th {
+    padding: 12px;
+    text-align: left;
+    z-index: 1;
+    cursor: pointer;
+}
+
+table[class^="style-table-"] td {
+    padding: 12px;
+}
+
+.jtable__panel .jtable__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+.jtable__panel .jtable__pagination button {
+    border: none;
+    padding: 6px;
+    margin: 0 2px;
+    /* font-size: 1em; */
+    cursor: pointer;
+    width: 2.2rem;
+    height: 2.2rem;
+    transition: background-color 0.3s ease;
+}
+
+table[class^="style-table-"] .fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+table[class^="style-table-"] .fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
+}
+
+/* ---- Style 1 ---- */
+table[class=style-table-1] {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    border-bottom: none;
+}
+
+table[class^="style-table-1"] a {
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--surface-700);
+}
+table[class^="style-table-1"] a:hover {
+    color: var(--primary-color-c75);
+}
+
+table[class=style-table-1] td {
+    border-bottom: 1px solid #ddd;
+}
+
+table[class=style-table-1] th {
+    background-color: var(--primary-color-c50);
+    color: white;
+    position: sticky;
+    top: 0;
+    transition: background-color 0.3s ease;
+}
+table[class=style-table-1] th:hover {
+    background-color: var(--primary-color-c40);
+}
+
+table[class=style-table-1] thead th:first-child {
+    border-radius: 12px 0 0 0;
+}
+table[class=style-table-1] thead th:last-child {
+    border-radius: 0 12px 0 0;
+}
+
+table[class=style-table-1] tr {
+    transition: background-color 0.2s ease;
+}
+table[class=style-table-1] tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+table[class=style-table-1] tr:hover {
+    background-color: #f1f1f1;
+}
+
+.jtable__panel.style-table-1 .jtable__pagination button {
+    background-color: var(--hovered-color);
+    color: var(--secondary-color);
+    border-radius: 100px;
+}
+.jtable__panel.style-table-1 .jtable__pagination button[aria-selected=true] {
+    background-color: var(--primary-color-c50);
+    color: white;
+}
+.jtable__panel.style-table-1 .jtable__pagination button.disabled {
+    color: var(--text-color-secondary);
+    cursor: default;
+}
+.jtable__panel.style-table-1 .jtable__pagination button.disabled:hover {
+    background-color: none;
+}
+
+
+/* ---- Style 2 ---- */
+table[class=style-table-2] {
+    font-size: 0.98rem;
+}
+
+table[class=style-table-2] th {
+    color: var(--datatable-title-color);
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+table[class=style-table-2] td {
+    border-bottom: 1px solid #ddd;
+}
+
+.jtable__panel.style-table-2 .jtable__pagination button {
+    background-color: transparent;
+    color: var(--secondary-color);
+    border-radius: 100px;
+}
+.jtable__panel.style-table-2 .jtable__pagination button[aria-selected=true] {
+    background-color: var(--secondary-color);
+    color: white;
+}
+.jtable__panel.style-table-2 .jtable__pagination button:not(button[aria-selected=true]):hover {
+    background-color: var(--hovered-color);
+}
+.jtable__panel.style-table-2 .jtable__pagination button.disabled {
+    color: var(--text-color-secondary);
+    cursor: default;
+}
+.jtable__panel.style-table-2 .jtable__pagination button.disabled:hover {
+    background-color: none;
+}

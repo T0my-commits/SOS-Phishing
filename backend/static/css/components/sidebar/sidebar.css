@@ -1,0 +1,89 @@
+/* Style de la sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 95.8%;
+  width: var(--sidebar-width);
+  position: fixed;
+  top: 1%;
+  left: 0;
+  box-shadow: var(--primary-box-shadow);
+  transition: var(--transition-slow);
+  background-color: white; /* Couleur de fond */
+  padding-top: 20px;
+  border: 1px solid rgba(221, 224, 255, .7);
+  border-radius: 0 var(--border-radius-sidebar) var(--border-radius-sidebar) 0;
+}
+
+.sidebar-active {
+  transform: translateX(-280px);
+  transition: var(--transition-slow);
+}
+
+/* Conteneur pour le contenu du haut de la sidebar */
+.sidebar-content {
+  flex-grow: 1;
+  overflow: auto;
+}
+.sidebar-content::-webkit-scrollbar {
+  display: none;
+}
+.sidebar-content:hover::-webkit-scrollbar {
+  display: block;
+}
+
+/* Style des liens dans la sidebar */
+.sidebar a {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 0 var(--border-radius-sidebar) var(--border-radius-sidebar) 0;
+  text-decoration: none;
+  color: black;
+  display: block;
+  transition: background-color .2s;
+  font-size: 1.02rem;
+}
+
+/* Changement de couleur au survol */
+.sidebar a:hover {
+  background-color: var(--hovered-color);
+  transition: var(--transition-medium);
+}
+
+.sidebar .bi::before {
+  color: var(--primary-color);
+}
+.sidebar-staff-icon::before {
+  color: var(--orange-500) !important;
+}
+
+/* Séparateur */
+hr {
+  border: 1px solid #d7d7d7;
+  margin: 20px 0 0;
+}
+
+/* Boutons en bas de la sidebar */
+.bottom-links {
+  padding: 5px 0 25px;
+}
+.bottom-links a {
+  margin-right: 0;
+  border-radius: 0;
+}
+
+.burger-btn-sidebar {
+  border-radius: 100%;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  padding: 6px;
+  cursor: pointer;
+  transition: var(--transition-medium);
+}
+.burger-btn-sidebar:hover {
+  background-color: var(--hovered-color);
+  transition: var(--transition-medium);
+}
+

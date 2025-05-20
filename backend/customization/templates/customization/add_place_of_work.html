@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock title %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+    <div class="w-full">
+        <div class="flex flex-column justify-content-between h-full m-0 p-0" style="position: relative;">
+            <h2>Manage places of work</h2>
+            <div class="flex gap-2" style="position: absolute; bottom: 1rem; right: 1rem;">
+                <a id="openCsvImport" class="btn btn-secondary bi bi-plus-circle">Import CSV</a>
+                <a href="{% url 'add_place_of_work_csv' %}" class="btn btn-primary bi bi-arrow-down-circle">Export CSV</a>
+            </div>
+        </div>
+
+
+        <!-- Overlay CSV import -->
+        <div id="modalCsvImport" class="overlay hidden">
+            <!-- Fenêtre modale -->
+            <div class="modal">
+                <h2>Import CSV file</h2>
+
+                <div class="toast info flex flex-row justify-content-between cursor-auto">
+                    <p class="bi bi-bell">Please refer to the documentation for the expected file format.</p>
+                </div>
+
+                <p>Please import your file below.</p>
+
+                <form action="{% url 'add_place_of_work_csv' %}" method="POST" enctype="multipart/form-data"  class="flex flex-column gap-2">
+                    {% csrf_token %}
+                    <div>
+                        {{ add_place_of_work_csv_form.file.label_tag }}
+                        {{ add_place_of_work_csv_form.file }}
+                    </div>
+                    <div>
+                        {{ add_place_of_work_csv_form.keep_data.label_tag }}
+                        {{ add_place_of_work_csv_form.keep_data }}
+                    </div>
+
+                    <div class="flex flex-row justify-content-end gap-1">
+                        <button class="btn btn-secondary">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col-12 lg:col-6 xl:col-4">
+                <div class="card">
+                    <!-- Form -->
+                    <span class="block text-800 font-medium text-left mb-4 bi bi-plus-circle">
+                        Add manually
+                    </span>
+                    <div class="mb-5">
+                        <form class="w-full flex flex-column align-items-start gap-2" method="POST">
+                            {% csrf_token %}
+                            {{ add_place_of_work_form.name.label_tag }}
+                            {{ add_place_of_work_form.name }}
+                            {{ add_place_of_work_form.address.label_tag }}
+                            {{ add_place_of_work_form.address }}
+                            {{ add_place_of_work_form.country.label_tag }}
+                            {{ add_place_of_work_form.country }}
+                            <button type="submit" class="btn btn-primary mt-3">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 lg:col-6 xl:col-8">
+                <div class="card">
+                     <!-- Actual list of interests -->
+                    <table id="places_of_work_list" data-style="style-table-2" data-replace="jtable" data-search="true" data-row-per-page=100 data-locale="en">
+                        <thead>
+                            <tr>
+                                <th class="bi bi-sort-down">Country</th>
+                                <th class="bi bi-arrow-down-up">Name of place of work</th>
+                                <th class="bi bi-arrow-down-up">Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for el in places_of_work_list %}
+                            <tr>
+                                <td>{{ el.country_name }}</td>
+                                <td>{{ el.name }}</td>
+                                <td>{{ el.address }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+new Modal('#modalCsvImport', {
+    type: 'card-center',
+    triggers: ['#openCsvImport'],
+    options: [],
+});
+</script>
+{% endblock scripts %}

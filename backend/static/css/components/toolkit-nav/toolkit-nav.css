@@ -1,0 +1,22 @@
+
+/* Toolkit navbar */
+#toolkit-nav {
+  position: fixed;
+  top: 50%;
+  right: 0;
+}
+#toolkit-nav div {
+  background-color: var(--primary-color-c50);
+  color: white;
+  padding: 0.7rem;
+  transform: translateX(15px);
+  border-radius: 10px 0 0 10px;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+  transition: var(--transition-medium);
+}
+#toolkit-nav div:hover {
+  cursor: pointer;
+  transform: translateX(8px);
+  transition: var(--transition-medium);
+}
