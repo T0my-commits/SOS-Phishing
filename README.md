@@ -1,98 +1,98 @@
-# 🛡️ SOS Phishing — Application d'études de campagnes de phishing
+![SOS_logo](./frontend/public/img/sos_logo_magenta.png)
 
-SOS phishing est une application web en cours de développement qui permet de **lancer, suivre et analyser des campagnes de phishing à des fins pédagogiques ou de sensibilisation à la cybersécurité**.
+# 🛡️ SOS Phishing — Phishing Campaign Analysis Platform
 
-Le but de ce projet est de fournir un outil complet pour :
-- **Créer et configurer des campagnes de phishing**
-- **Collecter les données associées**
-- **Visualiser les résultats via un tableau de bord dynamique**
+**SOS Phishing** is a web application currently *under development*. It is designed to **launch, monitor, and analyze phishing campaigns** for educational purposes and cybersecurity awareness.
 
-> 💡 Le projet intègre une stack fullstack moderne (Nuxt 3 + Django REST) et doit mettre l’accent sur la sécurité, la modularité du code, et la réutilisabilité des composants.
+The project aims to deliver a full-featured tool to:
+- **Create and configure phishing campaigns**
+- **Collect relevant data**
+- **Visualize results through an interactive dashboard**
+
+> 💡 Built with a modern fullstack architecture (Nuxt 3 + Django REST), the app must focuses on security, clean code structure, and reusable components.
 
 ---
 
-## 🚀 Fonctionnalités principales
+## 🚀 Implemented Features
 
-✅ **Authentification sécurisée** avec gestion complète des tokens (JWT + refresh)  
-✅ **Création de campagnes de phishing** via formulaire dynamique  
-✅ **Tableau de bord des campagnes** (dashboard responsive, data-driven)
+✅ **Secure authentication** with full JWT + refresh token management
+✅ **Dashboard view** for campaign monitoring and results
 
-🎥 Aperçu du fonctionnement :
-- Authentification + création de campagne : ![auth](./doc/IMG/auth_and_create_campaign.gif)
-- Dashboard des campagnes : ![dashboard](./doc/IMG/dashboard_view.gif)
+🎥 Feature previews:
+- Authentication + campaign creation: ![auth](./doc/IMG/auth_and_create_campaign.gif)  
+- Campaign dashboard: ![dashboard](./doc/IMG/dashboard_view.gif)
 
 ---
 
 ## 🖥️ Frontend — [Nuxt 3, PrimeVue, Pinia]
 
-Le frontend repose sur **Nuxt 3**, avec un code structuré et orienté composabilité :
+The frontend is built with **Nuxt 3**, using a composable and modular architecture.
 
-### 🔐 Authentification complète en JavaScript
-- Stockage et rafraîchissement automatique des **tokens JWT / refresh tokens**
-- Login/Logout, redirections sécurisées
+### 🔐 Full JavaScript Authentication
+- Secure storage and automatic refresh of **JWT + refresh tokens**
+- Login/logout flows with protected routing and redirect logic
 
-### 🔄 Middleware & Contrôle d'accès
-- Utilisation des middlewares **Nuxt** pour :
-  - Protéger les routes sensibles
-  - Rediriger automatiquement en fonction du statut d'authentification
-  - Centraliser la logique d'accès
+### 🔄 Middleware & Access Control
+- Nuxt middleware used to:
+  - Protect sensitive routes
+  - Automatically redirect users based on auth status
+  - Centralize access control logic
 
-### 🧩 Composants & Appels API
-- Composables Nuxt (`useApiFetch`, `useAuth`, etc.)
-- Appels API centralisés avec gestion des erreurs et loaders
+### 🧩 API Communication & Composables
+- Custom Nuxt composables (`useApiFetch`, `useAuth`, etc.)
+- Centralized API call handling with error catching and loading indicators
 
-### 📱 UI Responsive & Personnalisation
-- Layout responsive basé sur **PrimeFlex** (CSS utility grid system)
-- **Sidebar customisée** (CSS + JS natif) avec animations
-- Thème léger, séparation des vues et composants
+### 📱 Responsive UI & Custom Design
+- Responsive layout using **PrimeFlex** (utility-first CSS grid)
+- **Custom sidebar** (CSS + native JS) with dynamic behavior
+- Light theming with clear component/view separation
 
 ---
 
 ## 🛠️ Backend — [Django + Django REST Framework]
 
-Le backend repose sur **Django** avec une API REST structurée et sécurisée :
+The backend is powered by **Django** and a structured, secure **REST API**.
 
 ### 🧱 Architecture
-- API construite avec **Django REST Framework**
-- Accès aux données via le **Django ORM** et des **managers personnalisés**
-- Sérialisation fine via les **serializers DRF**
+- REST API built with **Django REST Framework**
+- Data access via **Django ORM** with **custom model managers**
+- Clean data serialization using DRF serializers
 
-### 🔐 Sécurité & Auth
-- Authentification basée sur JWT (via `djangorestframework-simplejwt`)
-- Permissions DRF configurées pour sécuriser les endpoints
+### 🔐 Security & Authentication
+- JWT-based authentication (using `djangorestframework-simplejwt`)
+- DRF permission classes for endpoint protection and role control
 
-### 📊 Base de données & modèles
-- Schéma relationnel adapté aux campagnes de phishing (utilisateurs, campagnes, statistiques)
-- Logique métier encapsulée dans les modèles (méthodes et managers)
-
----
-
-## 📚 En cours de développement
-
-SOS Phishing est en phase de prototypage actif. Les fonctionnalités à venir sont :
-
-- [ ] Envoi d’emails de phishing (à intégrer)
-- [ ] Statistiques détaillées pour le front : clics, saisies, temps de réponse
-- [ ] Export CSV / PDF pour une campagne ou données utilisateur
-- [ ] Gestion multi-utilisateurs / rôles
+### 📊 Database & Data Models
+- Relational schema tailored to phishing campaigns (users, campaigns, stats)
+- Business logic embedded in model methods and managers
 
 ---
 
-## ⚙️ Stack technique
+## 📚 Development Status
 
-| Frontend             | Backend              | Autres                      |
+**SOS Phishing** is actively in development. Planned features include:
+
+- [ ] Phishing email delivery (SMTP integration and mock service for testing purposes)
+- [ ] Additionnal user interaction stats
+- [ ] CSV/PDF export for campaigns and users
+- [ ] Multi-user and role-based access control
+
+---
+
+## ⚙️ Tech Stack
+
+| Frontend             | Backend              | DevOps / Tools              |
 |----------------------|----------------------|-----------------------------|
 | Nuxt 3               | Django 4             | Git / GitHub                |
 | PrimeVue             | Django REST Framework| Docker                      |
-| PrimeFlex            | PostgreSQL           | JWT / Auth sécurisée        |
-| PrimeVue             | Django ORM + Managers| Composables, API Middleware |
+| PrimeFlex            | PostgreSQL           | JWT Auth                    |
+| PrimeVue             | Django ORM + Managers| Custom middleware, composables |
 
 ---
 
-## 💬 Pourquoi ce projet ?
+## 💬 Why This Project?
 
-Ce projet est né d’un double objectif :
+This project was created with two goals in mind:
 
-1. **Apprentissage avancé** des technologies modernes (Nuxt 3 + DRF)
-2. **Création d’un outil utile et concret** de cybersécurité
-
+1. **Deepen expertise** with modern fullstack technologies (Nuxt 3, Django REST)
+2. **Build a useful, real-world cybersecurity tool** for education and awareness
