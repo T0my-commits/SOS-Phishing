@@ -1,6 +1,6 @@
 # 🛡️ PhishLab — Application d'études de campagnes de phishing
 
-PhishLab est une application web en cours de développement qui permet de **lancer, suivre et analyser des campagnes de phishing à des fins pédagogiques ou de sensibilisation à la cybersécurité**.
+SOS phishing est une application web en cours de développement qui permet de **lancer, suivre et analyser des campagnes de phishing à des fins pédagogiques ou de sensibilisation à la cybersécurité**.
 
 Le but de ce projet est de fournir un outil complet pour :
 - **Créer et configurer des campagnes de phishing**
