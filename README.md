@@ -1,4 +1,4 @@
-# 🛡️ PhishLab — Application d'études de campagnes de phishing
+# 🛡️ SOS Phishing — Application d'études de campagnes de phishing
 
 SOS phishing est une application web en cours de développement qui permet de **lancer, suivre et analyser des campagnes de phishing à des fins pédagogiques ou de sensibilisation à la cybersécurité**.
 
