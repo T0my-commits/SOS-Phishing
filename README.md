@@ -24,7 +24,7 @@ The project aims to deliver a full-featured tool to:
 
 ---
 
-## 🖥️ Frontend — [Nuxt 3, PrimeVue, Pinia]
+## 🖥️ Frontend — [Nuxt 3, PrimeVue]
 
 The frontend is built with **Nuxt 3**, using a composable and modular architecture.
 
@@ -43,7 +43,7 @@ The frontend is built with **Nuxt 3**, using a composable and modular architectu
 - Centralized API call handling with error catching and loading indicators
 
 ### 📱 Responsive UI & Custom Design
-- Responsive layout using **PrimeFlex** (utility-first CSS grid)
+- Responsive layout using **PrimeVue** (JS components, layout) and **PrimeFlex** (CSS framework)
 - **Custom sidebar** (CSS + native JS) with dynamic behavior
 - Light theming with clear component/view separation
 
