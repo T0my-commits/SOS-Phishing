@@ -41,7 +41,7 @@ The frontend is built with **Nuxt 3**, using a composable and modular architectu
   - Centralize access control logic
 
 ### 🧩 API Communication & Composables
-- Custom Nuxt composables (`useApiFetch`, `useAuth`, etc.)
+- Custom Nuxt composables (`useAuth`)
 - Centralized API call handling with error catching and loading indicators
 
 ### 📱 Responsive UI & Custom Design
