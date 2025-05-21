@@ -86,7 +86,7 @@ The backend is powered by **Django** and a structured, secure **REST API**.
 | Nuxt 3               | Django 4             | Git / GitHub                |
 | PrimeVue             | Django REST Framework| Docker                      |
 | PrimeFlex            | PostgreSQL           | JWT Auth                    |
-| PrimeVue             | Django ORM + Managers| Custom middleware, composables |
+|                      | Django ORM + Managers| Custom middleware, composables |
 
 ---
 
