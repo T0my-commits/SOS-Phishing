@@ -1,6 +1,8 @@
 ![SOS_logo](./frontend/public/img/sos_logo_magenta.png)
 
-# 🛡️ SOS Phishing — Phishing Campaign Analysis Platform
+> 🚧 This application is currently **under development** and not ready for production.
+
+# SOS Phishing — Phishing Campaign Analysis Platform
 
 **SOS Phishing** is a web application currently *under development*. It is designed to **launch, monitor, and analyze phishing campaigns** for educational purposes and cybersecurity awareness.
 
@@ -15,7 +17,7 @@ The project aims to deliver a full-featured tool to:
 
 ## 🚀 Implemented Features
 
-✅ **Secure authentication** with full JWT + refresh token management
+✅ **Secure authentication** with full JWT + refresh token management  
 ✅ **Dashboard view** for campaign monitoring and results
 
 🎥 Feature previews:
