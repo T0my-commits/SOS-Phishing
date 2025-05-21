@@ -31,7 +31,7 @@ The project aims to deliver a full-featured tool to:
 The frontend is built with **Nuxt 3**, using a composable and modular architecture.
 
 ### 🔐 Full JavaScript Authentication
-- Secure storage and automatic refresh of **JWT + refresh tokens**
+- Automatic refresh of **JWT + refresh tokens**
 - Login/logout flows with protected routing and redirect logic
 
 ### 🔄 Middleware & Access Control
