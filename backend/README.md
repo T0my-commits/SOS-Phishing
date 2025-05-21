@@ -5,6 +5,7 @@
 # A améliorer
 - OK Ajouter le nombre de pièces jointes ouvertes
 - OK Patrick Hooper case
+- OK Faire une copie des targets pour chaque campagne
 - Ajouter export PDF des dashboards
 - Ajouter template utilisé dans Options
 - Modifier DB
@@ -24,8 +25,7 @@
 - Mesures de remédiation après une campagne
 - Relier la classe CognitiveBiases à un flow de templates
 - Afficher les "tags" d'une campagne (affichage simplifié des biais cognitifs)
-- Stocker l'adresse MAC de l'appareil qui à cliquer sur un lien pour ne pas polluer la DB avec du brute forcing
-- Faire une copie des targets pour chaque campagne
+- Stocker l'adresse MAC de l'appareil qui à cliqué sur un lien pour ne pas polluer la DB avec du brute forcing
 - Blacklist IP pour fonctionnalités non payées
 - Longueur message verification front, compteur caractères
 - numéros de version des classes de copy
@@ -36,12 +36,3 @@
 - Finir export csv target
 - Vérifier que l'url_id est unique avant de l'utiliser dans la création de campagne
 - Vérifier que la date de début d'une campagne et la date de fin sont cohérentes
-
-# Features
-- Test du colis de phishing
-
-# Creds
-- super-admin Django: sos-phishing-admin-847763/j7OXS0uV1AQXDzhYWt
-
-# Font comments
-- figlet -f pagga "Text"
