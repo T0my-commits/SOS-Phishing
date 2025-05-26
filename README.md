@@ -98,3 +98,7 @@ This project was created with two goals in mind:
 
 1. **Deepen expertise** with modern fullstack technologies (Nuxt 3, Django REST)
 2. **Build a useful, real-world cybersecurity tool** for education and awareness
+
+## 🧑‍🔬 Contribute
+
+This repository does not yet accept merge requests and exists for now for demonstration purposes only.
