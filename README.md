@@ -94,7 +94,7 @@ The backend is powered by **Django** and a structured, secure **REST API**.
 
 ---
 
-## Database
+## 🛟 Database
 
 Here is the class diagram of the shared_models application:
 
