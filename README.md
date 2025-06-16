@@ -1,6 +1,7 @@
 ![SOS_logo](./frontend/public/img/sos_logo_magenta.png)
 
-> 🚧 This application is currently **under development** and not ready for production.  
+> 🚧 This application is currently **under development** and not ready for production.
+  
 > ⚠️ The project was originally coded in pure Python Django. The Django REST Framework module and the Nuxt.js frontend application were added later. However, for skills demonstration purposes only, the Django templates and all associated code were left in the project.
 
 # SOS Phishing — Phishing Campaign Analysis Platform
