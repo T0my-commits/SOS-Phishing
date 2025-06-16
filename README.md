@@ -94,6 +94,12 @@ The backend is powered by **Django** and a structured, secure **REST API**.
 
 ---
 
+## Database
+
+Here is the class diagram of the shared_models application:
+
+![Class Diagram of SOS Phishing](./doc/IMG/model_diagram.png)
+
 ## 💬 Why This Project?
 
 This project was created with two goals in mind:
