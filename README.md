@@ -80,6 +80,7 @@ The backend is powered by **Django** and a structured, secure **REST API**.
 - [ ] Additionnal user interaction stats
 - [ ] CSV/PDF export for campaigns and users
 - [ ] Multi-user and role-based access control
+- [ ] Rework database structure to improve snapshot management
 
 ---
 
