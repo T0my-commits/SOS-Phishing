@@ -98,7 +98,7 @@ The backend is powered by **Django** and a structured, secure **REST API**.
 
 ## 🚀 Run it
 
-First setup en .env file in the root directory:
+First setup a .env file in the root directory:
 ```bash
 # Django settings
 export DJANGO_SECRET_KEY="$YOUR_SECRET_KEY"
