@@ -96,6 +96,35 @@ The backend is powered by **Django** and a structured, secure **REST API**.
 
 ---
 
+## 🚀 Run it
+
+First setup en .env file in the root directory:
+```bash
+# Django settings
+export DJANGO_SECRET_KEY="$YOUR_SECRET_KEY"
+export DJANGO_DEBUG=True
+export DJANGO_ALLOWED_HOSTS=localhost
+export CORS_ALLOWED_ORIGINS=http://localhost:3000
+
+# Database
+export POSTGRES_DB=sos_db
+export POSTGRES_USER="$YOUR_USER"
+export POSTGRES_PASSWORD="$YOUR_PASSWORD"
+export POSTGRES_HOST=sos-phishing-django-nuxtjs-sos-db-1
+export POSTGRES_PORT=5432
+
+# Nuxt settings
+export BASE_API_URL=http://localhost:8000/
+```  
+
+Then, execute the Docker apps. by doing:
+
+```bash
+$ sudo docker compose up --remove-orphans
+```  
+
+Use the keybinding *Ctrl+C* to shutdown the app.
+
 ## 💬 Why This Project?
 
 This project was created with two goals in mind:
