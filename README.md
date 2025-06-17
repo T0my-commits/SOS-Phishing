@@ -85,12 +85,13 @@ The backend is powered by **Django** and a structured, secure **REST API**.
 
 ## ⚙️ Tech Stack
 
-| Frontend             | Backend              | DevOps / Tools              |
-|----------------------|----------------------|-----------------------------|
-| Nuxt 3               | Django 4             | Git / GitHub                |
-| PrimeVue             | Django REST Framework| Docker                      |
-| PrimeFlex            | PostgreSQL           | JWT Auth                    |
-|                      | Django ORM + Managers| Custom middleware, composables |
+| Frontend                       | Backend                        | DevOps / Tools              |
+|--------------------------------|--------------------------------|-----------------------------|
+| Nuxt 3                         | Django 4                       | Git / GitHub                |
+| PrimeVue                       | Django REST Framework          | Docker                      |
+| PrimeFlex                      | PostgreSQL                     |                             |
+| Custom middleware, composables | Django ORM + Managers          |                             |
+|                                | JWT Auth using DRF             |                             |
 
 ---
 
