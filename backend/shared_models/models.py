@@ -530,10 +530,28 @@ class PlaceOfWork(models.Model):
         COUNTRY='place_of_work_country'
     )
 
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='places_of_work')
-    name = models.CharField(max_length=255)
-    address = models.TextField(blank=True, null=True)
-    country = CountryField(blank=False)
+    is_snapshot = models.BooleanField(
+        default=False
+    )
+
+    client = models.ForeignKey(
+        Client, 
+        on_delete=models.CASCADE, 
+        related_name='places_of_work'
+    )
+
+    name = models.CharField(
+        max_length=255
+    )
+    
+    address = models.TextField(
+        blank=True, 
+        null=True
+    )
+    
+    country = CountryField(
+        blank=False
+    )
 
     def __str__(self):
         return self.name
@@ -587,9 +605,24 @@ class Interest(models.Model):
         COLOR='interest_color'
     )
 
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='interests')
-    name = models.CharField(max_length=255)
-    color = models.CharField(max_length=10, default="#" + "".join([random.choice("0123456789ABCDEF") for j in range(6)]))
+    is_snapshot = models.BooleanField(
+        default=False
+    )
+
+    client = models.ForeignKey(
+        Client, 
+        on_delete=models.CASCADE, 
+        related_name='interests'
+    )
+    
+    name = models.CharField(
+        max_length=255
+    )
+    
+    color = models.CharField(
+        max_length=10, 
+        default="#" + "".join([random.choice("0123456789ABCDEF") for j in range(6)])
+    )
 
     def __str__(self):
         return self.name
