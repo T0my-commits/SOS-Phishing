@@ -1,6 +1,6 @@
 <template>
     <div id="myHeader">
-        <Menubar class="flex align-items-center justify-content-between" :model="headerItems">
+        <Menubar class="flex align-items-center justify-content-between">
             <template #start>
               <i class="pi pi-bars p-2 ml-2 mr-2 custom-sidenav-button" @click="$emit('toggle-sidenav', 'toggleNav')"></i>
             </template>
@@ -24,9 +24,6 @@
 
 <script>
 export default {
-  name: 'HeaderView',
-  props: [
-    'headerItems',
-  ],
+  name: 'HeaderView'
 }
 </script>

@@ -7,16 +7,6 @@ const toggleNav = () => {
   isSidenavVisibleBis.value = !isSidenavVisibleBis.value;
 };
 
-const setHeaderItems = (items) => {
-  this.headerItems.value = {};
-  if (items) {
-    this.headerItems.value = items;
-  }
-  this.headerItems.value = items;
-};
-
-// Provide it for children
-// provide('setHeaderItems', setHeaderItems);
 </script>
 
 <template>
@@ -26,7 +16,7 @@ const setHeaderItems = (items) => {
 
     <!-- Header -->
     <div id="main-content">
-      <CommonHeaderView headerItems="" @toggle-sidenav="toggleNav" />
+      <CommonHeaderView @toggle-sidenav="toggleNav" />
 
       <!-- Page to display -->
       <NuxtPage />

@@ -70,13 +70,12 @@ static_root/
 media/
 
 # === DOCUMENTATION ===
-
 /doc/BUSINESS_PLAN/
 /doc/Videos/
 /doc/UI/
 /doc/UML/
 
 # === OTHERS ===
-
 backup.sql
+DISTINCTION_LICENSE.txt
 

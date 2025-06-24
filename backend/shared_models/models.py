@@ -346,27 +346,82 @@ class Campaign(models.Model):
         (EventsType.CREDENTIALS_LEAK.value, 'User has leaked some credentials'),
     ]
 
-    clients = models.ManyToManyField(Client, blank=False, related_name='campaigns')
-    name = models.CharField(max_length=255)
-    url_id = models.CharField(max_length=21, null=False, blank=False, unique=True)
+    clients = models.ManyToManyField(
+        Client, 
+        blank=False, 
+        related_name='campaigns'
+    )
+    name = models.CharField(
+        max_length=255
+    )
+    url_id = models.CharField(
+        max_length=21, 
+        null=False, 
+        blank=False, 
+        unique=True
+    )
     description = models.TextField()
-    type = models.CharField(max_length=10, choices=CAMPAIGN_TYPES, default='email')
-    mode = models.CharField(max_length=10, choices=MODES, default='auto')
-    expected_signaling = models.PositiveSmallIntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)], default=20, help_text="Expected signaling for this campain. Enter a percentage value between 0 and 100")
-    compromise_type = models.CharField(max_length=25, blank=False, null=False, choices=COMPROMISE_TYPES, default='click', help_text="When is a target considered compromised?")
-    notes = models.TextField(blank=True, null=True)
-    arbitrary_failures = models.PositiveIntegerField(default=0)
-    start_date = models.DateTimeField(blank=False, null=False, default=timezone.now, help_text="Start date of the campaign")
-    end_date = models.DateTimeField(blank=False, null=False, default=None, help_text="End date of the campaign")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    is_archive = models.BooleanField(default=False)
+
+    type = models.CharField(
+        max_length=10, 
+        choices=CAMPAIGN_TYPES, 
+        default='email'
+    )
+    mode = models.CharField(
+        max_length=10, 
+        choices=MODES, 
+        default='auto'
+    )
+    expected_signaling = models.PositiveSmallIntegerField(
+        validators=[
+            MinValueValidator(0), 
+            MaxValueValidator(100)
+        ], 
+        default=20, 
+        help_text="Expected signaling for this campain. Enter a percentage value between 0 and 100"
+    )
+    compromise_type = models.CharField(
+        max_length=25, 
+        blank=False, 
+        null=False, 
+        choices=COMPROMISE_TYPES, 
+        default='click', 
+        help_text="When is a target considered compromised?"
+    )
+    notes = models.TextField(
+        blank=True, 
+        null=True
+    )
+    arbitrary_failures = models.PositiveIntegerField(
+        default=0
+    )
+    start_date = models.DateTimeField(
+        blank=False, 
+        null=False, 
+        default=timezone.now, 
+        help_text="Start date of the campaign"
+    )
+    end_date = models.DateTimeField(
+        blank=False, 
+        null=False, 
+        default=None, 
+        help_text="End date of the campaign"
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+    is_archive = models.BooleanField(
+        default=False
+    )
     objects = CampaignManager()
 
     def __str__(self):
         return self.name
     
-    def save(self, targets_list:list=None, **kwargs):
+    def save(self, targets_list:list=[], **kwargs):
         """ Save method override.
             We duplicate all DB instances that is binded to the element in *Copy classes.
         """
@@ -605,16 +660,65 @@ class Target(models.Model):
         JOB_TYPE='target_job_type',
     )
 
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='targets')
-    firstname = models.CharField(max_length=255)
-    lastname = models.CharField(max_length=255)
-    email = models.EmailField(blank=True, null=True)
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    country = CountryField(blank=True)
-    places_of_work = models.ForeignKey(PlaceOfWork, on_delete=models.DO_NOTHING, blank=True, null=True, related_name='targets')
-    interests = models.ManyToManyField(Interest, blank=True, related_name='targets')
-    job_type = models.ForeignKey(JobType, on_delete=models.DO_NOTHING, blank=True, null=True, related_name='targets')
+    is_snapshot = models.BooleanField(
+        default=False
+    )
+
+    client = models.ForeignKey(
+        Client, 
+        on_delete=models.CASCADE, 
+        related_name='targets'
+    )
+
+    firstname = models.CharField(
+        max_length=255
+    )
+
+    lastname = models.CharField(
+        max_length=255
+    )
+
+    email = models.EmailField(
+        blank=True, 
+        null=True
+    )
+    
+    phone = models.CharField(
+        max_length=20, 
+        blank=True, 
+        null=True
+    )
+    
+    address = models.TextField(
+        blank=True, 
+        null=True
+    )
+    
+    country = CountryField(
+        blank=True
+    )
+    
+    places_of_work = models.ForeignKey(
+        PlaceOfWork, 
+        on_delete=models.DO_NOTHING, 
+        blank=True, 
+        null=True, 
+        related_name='targets'
+    )
+    
+    interests = models.ManyToManyField(
+        Interest, 
+        blank=True, 
+        related_name='targets'
+    )
+    
+    job_type = models.ForeignKey(
+        JobType, 
+        on_delete=models.DO_NOTHING, 
+        blank=True, 
+        null=True, 
+        related_name='targets'
+    )
 
     def __str__(self):
         return f"{self.firstname} {self.lastname}"

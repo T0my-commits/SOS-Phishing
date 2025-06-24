@@ -260,7 +260,7 @@ onMounted(async () => {
 
         <!-- List Activities -->
         <div class="col-12">
-          <div class="card h-full flex flex-column gap-3">
+          <div class="card h-full flex flex-column gap-3 text-sm">
             <span class="block text-800 font-medium text-left mb-3">Recent Activities</span>
 
             <!-- Data table -->
